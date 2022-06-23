@@ -24,4 +24,13 @@ class UserTest extends TestCase
         $user->setPassword('password');
         self::assertSame('password', $user->getPassword());
     }
+
+    public function test_it_should_update_email_property()
+    {
+        $user = new User();
+
+        self::assertEmpty($user->getEmail());
+        $user->setEmail('example@gmail.com');
+        self::assertSame('example@gmail.com', $user->getEmail());
+    }
 }
