@@ -15,4 +15,13 @@ class UserTest extends TestCase
         $user->setUsername('ocine');
         self::assertSame('ocine', $user->getUsername());
     }
+
+    public function test_it_should_update_password_property()
+    {
+        $user = new User();
+
+        self::assertEmpty($user->getPassword());
+        $user->setPassword('password');
+        self::assertSame('password', $user->getPassword());
+    }
 }
