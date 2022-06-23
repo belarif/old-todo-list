@@ -54,4 +54,13 @@ class TaskTest extends TestCase
 
         self::assertNotNull($task->isDone());
     }
+
+    public function test_it_should_update_is_done_property()
+    {
+        $task = new Task();
+
+        self::assertFalse($task->isDone());
+        $task->toggle(true);
+        self::assertTrue((bool)$task->isDone());
+    }
 }
