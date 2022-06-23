@@ -8,6 +8,13 @@ use PHPUnit\Framework\TestCase;
 
 class TaskTest extends TestCase
 {
+    public function test_it_should_return_value_id_property()
+    {
+        $task = new Task();
+
+        self::assertNull($task->getId());
+    }
+
     public function test_it_should_initialize_created_date_property()
     {
         $task = new Task();
