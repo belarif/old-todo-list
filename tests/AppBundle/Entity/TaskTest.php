@@ -20,7 +20,7 @@ class TaskTest extends TestCase
     {
         $task = new Task();
 
-        self::assertSame(false, $task->isDone());
+        self::assertFalse($task->isDone());
     }
 
     public function test_it_should_update_title_property()
