@@ -40,4 +40,11 @@ class TaskTest extends TestCase
         $task->setContent('le contenu de la tache');
         self::assertSame('le contenu de la tache', $task->getContent());
     }
+
+    public function test_it_should_return_is_done_property_value()
+    {
+        $task = new Task();
+
+        self::assertNotNull($task->isDone());
+    }
 }
