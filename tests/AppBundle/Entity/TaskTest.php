@@ -15,4 +15,11 @@ class TaskTest extends TestCase
         self::assertNotNull($task->getCreatedAt());
         self::assertSame((new DateTime())->format('Y-m-d'), $task->getCreatedAt()->format('Y-m-d'));
     }
+
+    public function test_it_should_initialize_is_done_property()
+    {
+        $task = new Task();
+
+        self::assertSame(false, $task->isDone());
+    }
 }
