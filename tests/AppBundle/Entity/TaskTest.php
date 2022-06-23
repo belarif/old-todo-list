@@ -31,4 +31,13 @@ class TaskTest extends TestCase
         $task->setTitle('le titre');
         self::assertSame('le titre', $task->getTitle());
     }
+
+    public function test_it_should_update_content_property()
+    {
+        $task = new Task();
+        self::assertEmpty($task->getContent());
+
+        $task->setContent('le contenu de la tache');
+        self::assertSame('le contenu de la tache', $task->getContent());
+    }
 }
