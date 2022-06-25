@@ -25,4 +25,18 @@ final class TaskControllerTest extends WebTestCase
         );
         self::assertNotNull($crawler->selectButton('submit'));
     }
+
+    public function test_it_should_display_tasks_list_page()
+    {
+        $client = self::createClient();
+
+        $urlGenerator = $client->getContainer()->get('router');
+
+        $crawler = $client->request('GET', $urlGenerator->generate('task_list'));
+
+        $response = $client->getResponse();
+
+        self::assertTrue($response->isOk());
+        self::assertNotNull($crawler->selectLink('Créer une tâche'));
+    }
 }
