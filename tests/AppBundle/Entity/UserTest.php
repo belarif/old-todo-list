@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    public function test_it_should_return_value_id_property()
+    public function test_it_should_initialize_user_with_empty_id()
     {
         $user = new User();
 
