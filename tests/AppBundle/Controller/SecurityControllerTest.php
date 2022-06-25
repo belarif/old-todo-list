@@ -17,18 +17,9 @@ final class SecurityControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         self::assertTrue($response->isOk());
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('form')->count()
-        );
+        self::assertCount(1, $crawler->filter('form'));
+        self::assertCount(1, $crawler->filter('input[name=_username]'));
+        self::assertCount(1, $crawler->filter('input[name=_password]'));
         self::assertNotNull($crawler->selectButton('submit'));
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[name=_username]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[name=_password]')->count()
-        );
     }
 }
