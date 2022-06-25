@@ -37,4 +37,20 @@ final class UserControllerTest extends WebTestCase
         );
         self::assertNotNull($crawler->selectButton('submit'));
     }
+
+    public function test_it_should_display_users_list_page()
+    {
+        $client = self::createClient();
+
+        $urlGenerator = $client->getContainer()->get('router');
+
+        $crawler = $client->request('GET', $urlGenerator->generate('user_list'));
+
+        $response = $client->getResponse();
+        self::assertTrue($response->isOk());
+        self::assertSame(
+            'Liste des utilisateurs',
+            $crawler->filter('h1')->first()->text()
+        );
+    }
 }
