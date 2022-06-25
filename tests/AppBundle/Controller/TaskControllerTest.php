@@ -2,6 +2,7 @@
 
 namespace Tests\AppBundle\Controller;
 
+use AppBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class TaskControllerTest extends WebTestCase
@@ -62,5 +63,19 @@ final class TaskControllerTest extends WebTestCase
             0,
             $crawler->filter('textarea[id=task_content]')->count()
         );
+    }
+
+    public function test_it_should_toggle_task()
+    {
+        $client = self::createClient();
+
+        $urlGenerator = $client->getContainer()->get('router');
+
+        $client->request('GET', '/tasks/5/toggle');
+
+        $task = new Task();
+
+        self::assertTrue(!$task->isDone());
+        self::assertTrue($client->getResponse()->isRedirect($urlGenerator->generate('task_list')));
     }
 }
