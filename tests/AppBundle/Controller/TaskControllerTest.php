@@ -78,4 +78,15 @@ final class TaskControllerTest extends WebTestCase
         self::assertTrue(!$task->isDone());
         self::assertTrue($client->getResponse()->isRedirect($urlGenerator->generate('task_list')));
     }
+
+    public function test_it_should_delete_task()
+    {
+        $client = self::createClient();
+
+        $urlGenerator = $client->getContainer()->get('router');
+
+        $client->request('GET', '/tasks/5/delete');
+
+        self::assertTrue($client->getResponse()->isRedirect($urlGenerator->generate('task_list')));
+    }
 }
