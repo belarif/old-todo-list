@@ -53,4 +53,34 @@ final class UserControllerTest extends WebTestCase
             $crawler->filter('h1')->first()->text()
         );
     }
+
+    public function test_it_should_display_user_edit_page()
+    {
+        $client = self::createClient();
+
+        $crawler = $client->request('GET', '/users/1/edit');
+
+        $response = $client->getResponse();
+        self::assertTrue($response->isOk());
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('form')->count());
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('input[id=user_username]')->count()
+        );
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('input[id=user_password_first]')->count()
+        );
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('input[id=user_password_second]')->count()
+        );
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('input[id=user_email]')->count()
+        );
+        self::assertNotNull($crawler->selectButton('submit'));
+    }
 }
