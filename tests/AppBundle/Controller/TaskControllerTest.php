@@ -39,4 +39,28 @@ final class TaskControllerTest extends WebTestCase
         self::assertTrue($response->isOk());
         self::assertNotNull($crawler->selectLink('Créer une tâche'));
     }
+
+    public function test_it_should_display_edit_task_page()
+    {
+        $client = self::createClient();
+
+        $crawler = $client->request('GET', '/tasks/2/edit');
+
+        $response = $client->getResponse();
+
+        self::assertTrue($response->isOk());
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('form')->count()
+        );
+        self::assertNotNull($crawler->selectButton('submit'));
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('input[id=task_title]')->count()
+        );
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('textarea[id=task_content]')->count()
+        );
+    }
 }
