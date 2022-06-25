@@ -18,12 +18,8 @@ final class TaskControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         self::assertTrue($response->isOk());
-
         self::assertNotNull($crawler->selectLink('Retour à la liste des tâches'));
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('form')->count()
-        );
+        self::assertCount(1, $crawler->filter('form'));
         self::assertNotNull($crawler->selectButton('submit'));
     }
 
@@ -45,24 +41,15 @@ final class TaskControllerTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/tasks/2/edit');
+        $crawler = $client->request('GET', '/tasks/4/edit');
 
         $response = $client->getResponse();
 
         self::assertTrue($response->isOk());
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('form')->count()
-        );
+        self::assertCount(1, $crawler->filter('form'));
+        self::assertCount(1, $crawler->filter('input[id=task_title]'));
+        self::assertCount(1, $crawler->filter('textarea[id=task_content]'));
         self::assertNotNull($crawler->selectButton('submit'));
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=task_title]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('textarea[id=task_content]')->count()
-        );
     }
 
     public function test_it_should_toggle_task()
@@ -71,7 +58,7 @@ final class TaskControllerTest extends WebTestCase
 
         $urlGenerator = $client->getContainer()->get('router');
 
-        $client->request('GET', '/tasks/5/toggle');
+        $client->request('GET', '/tasks/4/toggle');
 
         $task = new Task();
 
@@ -85,7 +72,7 @@ final class TaskControllerTest extends WebTestCase
 
         $urlGenerator = $client->getContainer()->get('router');
 
-        $client->request('GET', '/tasks/5/delete');
+        $client->request('GET', '/tasks/4/delete');
 
         self::assertTrue($client->getResponse()->isRedirect($urlGenerator->generate('task_list')));
     }
