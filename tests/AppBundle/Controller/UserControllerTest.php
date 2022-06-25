@@ -16,25 +16,11 @@ final class UserControllerTest extends WebTestCase
 
         $response = $client->getResponse();
         self::assertTrue($response->isOk());
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('form')->count());
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_username]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_password_first]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_password_second]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_email]')->count()
-        );
+        self::assertCount(1, $crawler->filter('form'));
+        self::assertCount(1, $crawler->filter('input[id=user_username]'));
+        self::assertCount(1, $crawler->filter('input[id=user_password_first]'));
+        self::assertCount(1, $crawler->filter('input[id=user_password_second]'));
+        self::assertCount(1, $crawler->filter('input[id=user_email]'));
         self::assertNotNull($crawler->selectButton('submit'));
     }
 
@@ -48,10 +34,7 @@ final class UserControllerTest extends WebTestCase
 
         $response = $client->getResponse();
         self::assertTrue($response->isOk());
-        self::assertSame(
-            'Liste des utilisateurs',
-            $crawler->filter('h1')->first()->text()
-        );
+        self::assertSame('Liste des utilisateurs', $crawler->filter('h1')->first()->text());
     }
 
     public function test_it_should_display_user_edit_page()
@@ -62,25 +45,11 @@ final class UserControllerTest extends WebTestCase
 
         $response = $client->getResponse();
         self::assertTrue($response->isOk());
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('form')->count());
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_username]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_password_first]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_password_second]')->count()
-        );
-        self::assertGreaterThan(
-            0,
-            $crawler->filter('input[id=user_email]')->count()
-        );
+        self::assertCount(1, $crawler->filter('form'));
+        self::assertCount(1, $crawler->filter('input[id=user_username]'));
+        self::assertCount(1, $crawler->filter('input[id=user_password_first]'));
+        self::assertCount(1, $crawler->filter('input[id=user_password_second]'));
+        self::assertCount(1, $crawler->filter('input[id=user_email]'));
         self::assertNotNull($crawler->selectButton('submit'));
     }
 }
